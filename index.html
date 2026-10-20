@@ -568,7 +568,7 @@ document.getElementById("app").innerHTML = `
   ${S.languages && S.languages.length ? `<div class="bg-col"><h2>Languages</h2><div class="langs">${S.languages.map(l => `<div class="lang"><span class="lang-name">${e(l.name)}</span><span class="lang-level">${e(l.level)}</span></div>`).join("")}</div>${S.prizes && S.prizes.length ? `<h2 class="sub-h">Prize</h2><div class="edu">${S.prizes.map(z => `<div class="edu-item"><h3>${e(z.title)}</h3><p>${e(z.detail)}</p>${z.year ? `<p class="edu-years">${e(z.year)}</p>` : ""}</div>`).join("")}</div>` : ""}</div>` : ""}
 </div></div></section>
 
-<section class="block minor" id="contact"><div class="wrap"><div class="contact"><div><h2>Let's talk</h2><p>${e(C.intro)}</p></div><div class="links">${links}</div></div></div></section>
+<section class="block minor" id="contact"><div class="wrap"><div class="contact"><div><h2>Contact</h2><p>${e(C.intro)}</p></div><div class="links">${links}</div></div></div></section>
 <footer><div class="wrap">${e(S.name)} · Portfolio</div></footer>
 <div class="viewer" id="viewer" hidden></div>`;
 
