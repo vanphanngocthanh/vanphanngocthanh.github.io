@@ -174,6 +174,8 @@ section[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 60px)}
 .note{position:absolute;right:3%;bottom:4%;font-size:clamp(8px,1vw,11px);font-weight:700;background:var(--accent-soft);color:var(--accent);padding:.3em .8em;border-radius:999px}
 .chips span.chip-claude{color:var(--claude);background:var(--claude-soft)}
 .card h3{font-weight:700;font-size:1.3rem;line-height:1.3;margin:0 0 10px}
+.ai-badge{display:inline-flex;margin:0 0 12px;font-size:.8rem;font-weight:700;color:var(--claude);background:var(--claude-soft);padding:4px 12px;border-radius:999px}
+.sheet-head .ai-badge{margin:8px 0 0}
 .card p.sum{margin:0 0 16px;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:999px;color:var(--accent);background:var(--accent-soft)}
@@ -408,7 +410,7 @@ const SITE = {
         "The drill-down shows P003-OpenBank API completed with all 4 milestones met and 102% budget utilization."
       ],
       embedUrl: "", liveUrl: "" },
-    { tag: "Automotive · Retail sales", title: "Car Showroom Sales Dashboard",
+    { tag: "Automotive · Retail sales", title: "Car Showroom Sales Dashboard", badge: "Built by Claude in 60 minutes",
       summary: "A two-page sales dashboard for 3 car showrooms that tracks revenue, quantity, transactions and average selling price, then compares categories and stores side by side.",
       problem: "",
       approach: [
@@ -490,7 +492,7 @@ function frame(p, live) {
 function card(p, i) {
   return `<article class="card" id="project-${i + 1}" data-i="${i}"${i >= FEATURED ? " hidden" : ""}>
     <div class="frame">${frame(p, false)}</div>
-    <div class="card-body"><p class="label">${e(p.tag)}</p><h3>${e(p.title)}</h3><p class="sum">${e(p.summary)}</p>
+    <div class="card-body"><p class="label">${e(p.tag)}</p><h3>${e(p.title)}</h3>${p.badge ? `<p class="ai-badge">${e(p.badge)}</p>` : ""}<p class="sum">${e(p.summary)}</p>
       ${p.stack.length ? `<div class="chips">${p.stack.map(s => `<span${s === "Claude" ? ' class="chip-claude"' : ""}>${e(s)}</span>`).join("")}</div>` : ""}
       <div class="card-foot"><button class="btn primary" type="button">View dashboard</button></div>
     </div></article>`;
@@ -498,7 +500,7 @@ function card(p, i) {
 
 function sheet(p) {
   return `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="viewer-title">
-    <div class="sheet-head"><div><p class="label">${e(p.tag)}</p><h3 id="viewer-title">${e(p.title)}</h3></div><button class="close" type="button" id="viewer-close">Close</button></div>
+    <div class="sheet-head"><div><p class="label">${e(p.tag)}</p><h3 id="viewer-title">${e(p.title)}</h3>${p.badge ? `<p class="ai-badge">${e(p.badge)}</p>` : ""}</div><button class="close" type="button" id="viewer-close">Close</button></div>
     ${p.pages && p.pages.length > 1 && !(HOSTED && p.embedUrl) ? `<div class="frame slider pages" aria-roledescription="carousel" aria-label="${e(p.title)} pages"><div class="track">${p.pages.map((pg, k) => `<img src="${e(pg.src)}" alt="${e(p.title)}: ${e(pg.name || "Page " + (k + 1))}">`).join("")}</div><button type="button" class="nav-arrow prev" aria-label="Previous page">‹</button><button type="button" class="nav-arrow next" aria-label="Next page">›</button><div class="dots">${p.pages.map((pg, k) => `<button type="button" class="dot${k === 0 ? " on" : ""}" aria-label="Show ${e(pg.name || "page " + (k + 1))}"></button>`).join("")}</div><span class="page-name">${e(p.pages[0].name || "Page 1")}</span></div>` : `<div class="frame">${frame(p, true)}</div>`}
     <div class="notes">
       <div><p>${e(p.summary)}</p>
