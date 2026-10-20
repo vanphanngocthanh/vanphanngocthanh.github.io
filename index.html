@@ -71,7 +71,7 @@ section.minor h2{font-size:clamp(1.25rem,2.4vw,1.6rem)}
 
 /* Comms case studies */
 #comms>.wrap{padding-block:64px 8px}
-.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px}
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px;align-items:start}
 .case{border:1px solid var(--line);border-radius:28px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
 .case-img{aspect-ratio:16/9;max-width:100%;background:var(--surface)}
 @media (min-width:860px){.case:only-child{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center}.case:only-child>.case-body{order:1;padding:32px 36px}.case:only-child>.case-gallery,.case:only-child>.case-img{order:2;height:100%}.case:only-child>.case-gallery{grid-template-columns:1fr;align-content:stretch;background:var(--bg)}}
@@ -93,6 +93,18 @@ a.case-img:hover .img-link{background:var(--accent);color:var(--accent-ink)}
 .stats>div{flex:1 1 120px;background:var(--accent-soft);border-radius:16px;padding:12px 14px;display:grid;gap:2px}
 .stats b{font-size:1.45rem;line-height:1.1;color:var(--accent);font-variant-numeric:tabular-nums}
 .stats span{font-size:.8rem;color:var(--on-hero-text)}
+.case-more{margin-top:2px}
+.case-more>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;padding:8px 0 0;border-top:1px solid var(--line);color:var(--accent);font-weight:700;font-size:.85rem}
+.case-more>summary::-webkit-details-marker{display:none}
+.plus{position:relative;flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);transition:background .2s,transform .25s}
+.plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:var(--accent)}
+.plus::after{transform:rotate(90deg);transition:transform .25s}
+.case-more>summary:hover .plus{background:var(--accent)}
+.case-more>summary:hover .plus::before,.case-more>summary:hover .plus::after{background:var(--accent-ink)}
+.case-more[open] .plus::after{transform:rotate(0deg)}
+.case-more>summary:focus-visible{outline:2px solid var(--cta);outline-offset:3px;border-radius:8px}
+.more-body{display:grid;gap:12px;padding-top:14px}
+@media (prefers-reduced-motion:reduce){.plus,.plus::after{transition:none}}
 .case-ch{margin:0;color:var(--ink);font-size:.95rem}
 .case-ch.has-tick{display:flex;gap:10px;align-items:flex-start}
 .tick{flex:none;width:20px;height:20px;margin-top:2px}
@@ -434,9 +446,11 @@ function caseCard(c) {
       ${c.tag ? `<p class="label">${e(c.tag)}</p>` : ""}
       <h4>${e(c.title)}</h4>
       <p class="case-role">${e(c.org)} · Role: ${e(c.role)}</p>
+      <details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">
       ${c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.brief ? `<p class="case-ch">${e(c.brief)}</p>` : `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${e(c.challenge)}</span></p>
       <ul class="built">${c.did.map(t => `<li>${e(t)}</li>`).join("")}</ul>`}
+      </div></details>
     </div></article>`;
 }
 
@@ -567,6 +581,7 @@ if (seeAll) seeAll.addEventListener("click", () => {
   else document.getElementById("work").scrollIntoView({ block: "start" });
 });
 
+document.querySelectorAll(".case-more").forEach(d => d.addEventListener("toggle", () => { const l = d.querySelector(".more-label"); if (l) l.textContent = d.open ? "Hide details" : "See details"; }));
 const btn = document.getElementById("copy-email");
 if (btn) btn.addEventListener("click", () => {
   const el = document.getElementById("email");
