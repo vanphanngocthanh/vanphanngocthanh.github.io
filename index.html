@@ -593,7 +593,7 @@ document.querySelectorAll(".slider").forEach(sl => {
   let i = 0, timer = null;
   const go = k => { i = (k + n) % n; track.style.transform = `translateX(-${i * 100}%)`; dots.forEach((d, j) => d.classList.toggle("on", j === i)); };
   const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const start = () => { if (!reduce && n > 1) { clearInterval(timer); timer = setInterval(() => go(i + 1), 3000); } };
+  const start = () => { if (!reduce && n > 1) { clearInterval(timer); timer = setInterval(() => go(i + 1), 5000); } };
   const stop = () => clearInterval(timer);
   dots.forEach((d, j) => d.addEventListener("click", () => { go(j); start(); }));
   sl.addEventListener("mouseenter", stop); sl.addEventListener("mouseleave", start);
