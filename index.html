@@ -96,6 +96,8 @@ figure.case-img{margin:0;position:relative}
 .logo-strip img{height:clamp(28px,3.4vw,40px);width:auto;max-width:30%;object-fit:contain}
 .logo-strip img.wide{height:auto;width:clamp(80px,9vw,120px);max-width:30%}
 .logo-arrow{color:var(--muted);font-size:1.2rem}
+a.title-link{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px;text-decoration-thickness:2px}
+a.title-link:hover{color:var(--accent)}
 a.cap-link{text-decoration:none}
 a.cap-link:hover{background:var(--accent);color:var(--accent-ink)}
 .case-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:3px;background:var(--line)}
@@ -348,7 +350,7 @@ const SITE = {
           "Developed corporate & leadership updates, employee stories, event recaps and culture campaigns.",
           "Directed design and video for each post."
         ], image: "" },
-      { tag: "Employer branding", title: "Great Place To Work Certification", org: "CBTW APAC", role: "Partner to People & Culture",
+      { tag: "Employer branding", title: "Great Place To Work Certification", org: "CBTW APAC", titleLink: "https://www.facebook.com/20531316728/posts/10154009990506729/", role: "Partner to People & Culture",
         stats: [],
         challenge: "Strengthen the company culture and make it visible to future talent.",
         did: [
@@ -504,7 +506,7 @@ function caseCard(c) {
     ${c.slides && c.slides.length ? `<div class="case-img slider" aria-roledescription="carousel" aria-label="${e(c.title)} photos"><div class="track">${c.slides.map((src, i) => `<img src="${e(src)}" alt="${e(c.title)} photo ${i + 1} of ${c.slides.length}">`).join("")}</div><div class="dots">${c.slides.map((_, i) => `<button type="button" class="dot${i === 0 ? " on" : ""}" aria-label="Show photo ${i + 1}"></button>`).join("")}</div></div>` : ""}${c.images && c.images.length ? `<div class="case-gallery">${c.images.map(im => { const src = typeof im === "string" ? im : im.src, cap = typeof im === "string" ? "" : im.caption, link = typeof im === "string" ? "" : im.link; return `<figure class="case-img">${`<img src="${e(src)}" alt="${e(cap || c.title)}">`}${cap ? (link ? `<figcaption><a class="img-cap cap-link" href="${e(link)}" target="_blank" rel="noopener">${e(cap)} ↗</a></figcaption>` : `<figcaption class="img-cap">${e(cap)}</figcaption>`) : ""}</figure>`; }).join("")}</div>` : ""}${c.image ? (c.link ? `<a class="case-img" href="${e(c.link)}" target="_blank" rel="noopener" aria-label="Visit ${e(c.title)} website"><img src="${e(c.image)}" alt="${e(c.title)}"><span class="img-link">${c.linkLabel ? e(c.linkLabel) : short(c.link).split("/")[0]} ↗</span></a>` : `<div class="case-img"><img src="${e(c.image)}" alt="${e(c.title)}"></div>`) : ""}
     <div class="case-body">
       ${c.tag ? `<p class="label">${e(c.tag)}</p>` : ""}
-      <h4>${e(c.title)}</h4>
+      <h4>${c.titleLink ? `<a class="title-link" href="${e(c.titleLink)}" target="_blank" rel="noopener">${e(c.title)}</a>` : e(c.title)}</h4>
       <p class="case-role">${e(c.org)} · Role: ${e(c.role)}</p>
       ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
       ${c.expanded ? `<div class="more-body open-body">` : `<details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">`}
