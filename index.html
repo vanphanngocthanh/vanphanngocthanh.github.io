@@ -224,7 +224,8 @@ a.open:hover{text-decoration:underline}
 .skill h3{font-size:.95rem;font-weight:700;margin:0 0 6px}
 .skill.wide{grid-column:1/-1}
 .skill p{margin:0;color:var(--on-hero-text);font-size:.95rem}
-@media (min-width:1000px){.skills{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}.skills>.skill:nth-child(1),.skills>.skill:nth-child(2){grid-row:span 2}}
+@media (min-width:1000px){.skills{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}}
+.tools-line{margin:8px 0 0}
 .skill-list{margin:8px 0 0;padding-left:1.1em;display:grid;gap:5px;color:var(--on-hero-text);font-size:.95rem}
 .skill-list li::marker{color:var(--cta)}
 .skill.wide .skill-list{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));column-gap:40px}
@@ -446,7 +447,7 @@ const SITE = {
     { group: "Communications & Branding", items: ["Strategic communications planning", "Employee engagement & internal campaigns", "Content strategy", "Copywriting & editing", "Press release writing & media relations", "Executive presentation design", "Brand governance", "Rebranding & change management", "Employer branding", "CSR & ESG communications"] },
     { group: "Event & Project Management", items: ["PMP® methodology", "Large-scale event management", "Corporate & tech events", "Stakeholder management", "Speaker & partner management", "Cross-functional coordination", "Budget & cost control", "Risk mitigation", "Supplier negotiation"] },
     { group: "Data & Reporting", items: ["Power BI", "Data modeling", "Dashboard design", "Data storytelling"] },
-    { group: "Tools", items: ["Jira", "Confluence", "Microsoft 365 (Word, PowerPoint, Excel, Teams, SharePoint)", "Adobe Illustrator", "Canva", "CapCut"] }
+    { group: "Tools", wide: true, items: ["Jira", "Confluence", "Microsoft 365 (Word, PowerPoint, Excel, Teams, SharePoint)", "Adobe Illustrator", "Canva", "CapCut"] }
   ],
   education: [
     { degree: "Master of Business Administration (MBA)", school: "University of Economics HCMC (UEH)", years: "2016 - 2018" },
@@ -565,7 +566,7 @@ document.getElementById("app").innerHTML = `
 </div></section>
 
 <section class="block minor" id="skills"><div class="wrap"><div class="sec-head"><h2>Skills &amp; Tools</h2></div>
-  <div class="skills">${S.skills.map(g => `<div class="skill${g.wide ? " wide" : ""}"><h3>${e(g.group)}</h3><ul class="skill-list">${g.items.map(t => `<li>${e(t)}</li>`).join("")}</ul></div>`).join("")}</div>
+  <div class="skills">${S.skills.map(g => `<div class="skill${g.wide ? " wide" : ""}"><h3>${e(g.group)}</h3>${g.wide ? `<p class="tools-line">${g.items.map(e).join(" · ")}</p>` : `<ul class="skill-list">${g.items.map(t => `<li>${e(t)}</li>`).join("")}</ul>`}</div>`).join("")}</div>
   ${S.certs.length ? `<h3 class="certs-h">Certification</h3><div class="certs">${S.certs.map(c => `<div class="cert-card">
     <div class="cert-top"><code>${e(c.code)}</code><div class="cert-id"><h3>${e(c.name)}</h3>${c.issued ? `<p class="cert-meta">Issued: ${e(c.issued)}</p>` : ""}</div>${c.url ? `<a class="cert-verify" href="${e(c.url)}" target="_blank" rel="noopener">Verify on Credly ↗</a>` : ""}</div>
     ${c.note ? `<p class="cert-note">${e(c.note)}</p>` : ""}
