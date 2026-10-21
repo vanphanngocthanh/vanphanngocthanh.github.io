@@ -329,7 +329,7 @@ const SITE = {
         ], image: "" }
     ] },
     { title: "Internal & Employee Comms · Employer Branding", cases: [
-      { tag: "Employee engagement", title: "Company-wide events and initiatives", org: "CBTW APAC", role: "Project Lead",
+      { tag: "Employee engagement", title: "Company-wide events and initiatives", org: "CBTW APAC", briefLinks: { "company trips": "https://www.facebook.com/cbtwapac/posts/pfbid034zHgbdXHRiBHvUkrVkx3Pm4Xvwo38A8ot9Dw82rFkM6iQXrJJJkAx1Q3KUUZPeNhl" }, role: "Project Lead",
         stats: [["1,000", "employees engaged"]],
         challenge: "Keep 1,000 employees in APAC informed, connected and engaged, both in the office and online.",
         did: [
@@ -505,7 +505,7 @@ function caseCard(c) {
       ${c.expanded ? `<div class="more-body open-body">` : `<details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">`}
       ${c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.brief ? `<p class="case-ch">${linkify(e(c.brief), c.briefLinks)}</p>` : `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${e(c.challenge)}</span></p>
-      <ul class="built">${c.did.map(t => `<li>${e(t)}</li>`).join("")}</ul>`}
+      <ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>`}
       </div>${c.expanded ? "" : "</details>"}
     </div></article>`;
 }
