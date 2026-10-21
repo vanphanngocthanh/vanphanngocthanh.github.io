@@ -511,8 +511,8 @@ function caseCard(c) {
       ${c.tag ? `<p class="label">${e(c.tag)}</p>` : ""}
       <h4>${c.titleLink ? `<a class="title-link" href="${e(c.titleLink)}" target="_blank" rel="noopener">${e(c.title)}</a>` : e(c.title)}</h4>
       <p class="case-role">${e(c.org)} · Role: ${e(c.role)}</p>
-      ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
       ${c.expanded ? `<div class="more-body open-body">` : `<details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">`}
+      ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
       ${c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.brief ? `<p class="case-ch">${linkify(e(c.brief), c.briefLinks)}</p>${c.did && c.did.length ? `<ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>` : ""}` : `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${e(c.challenge)}</span></p>
       <ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>`}
