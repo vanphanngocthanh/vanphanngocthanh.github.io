@@ -93,9 +93,9 @@ figure.case-img{margin:0;position:relative}
 .slider .dot.on{background:#fff;width:20px;border-radius:999px}
 @media (prefers-reduced-motion:reduce){.slider .track{transition:none}}
 .logo-strip{display:flex;align-items:center;justify-content:flex-start;gap:clamp(8px,1.6vw,16px);padding:14px 0 4px;background:transparent}
-.logo-strip img{height:clamp(28px,3.4vw,40px);width:auto;max-width:30%;object-fit:contain}
-.logo-strip img.wide{height:auto;width:clamp(80px,9vw,120px);max-width:30%}
-.logo-arrow{color:var(--muted);font-size:1.2rem}
+.logo-strip img{height:auto;max-height:clamp(28px,3.4vw,40px);width:auto;max-width:28%;min-width:0;flex:0 1 auto;object-fit:contain}
+.logo-strip img.wide{width:clamp(70px,9vw,120px);max-width:28%}
+.logo-arrow{color:var(--muted);font-size:1.2rem;flex:none}
 a.title-link{color:inherit;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px;text-decoration-thickness:2px}
 a.title-link:hover{color:var(--accent)}
 a.cap-link{text-decoration:none}
@@ -331,7 +331,10 @@ const SITE = {
           "Standardized and audited corporate identity assets across online and offline channels.",
           "Wrote guidelines for producing and deploying corporate collateral, POSM and merchandise.",
           "Advised other departments on branding compliance and corporate communication frameworks."
-        ], image: "" }
+        ], image: "" },
+      { tag: "In-house agency", title: "Comms services for business units", org: "CBTW APAC", role: "Comms Partner",
+        stats: [],
+        brief: "Delivered team-building events, office branding and merchandise for business units across CBTW, including NAB (National Australia Bank), Ansarada, MessageMedia and 3P Learning.", image: "" }
     ] },
     { title: "Internal & Employee Comms · Employer Branding", cases: [
       { tag: "Employee engagement", title: "Company-wide events and initiatives", org: "CBTW APAC", briefLinks: { "company trips": "https://www.facebook.com/share/v/1DKJLvcEoa/", "New Year": "https://www.facebook.com/cbtwapac/posts/pfbid0itae1aP5SafaG5193hS6y8T3uznCMucrXjYL7Z3FsnRhh4yZw33zoZwh9c1qZeeAl", "Christmas": "https://www.facebook.com/cbtwapac/posts/pfbid0gzVki3y9obqAFjyGACS6tJYstenr6kt5WPEYcPvdXmRVKDUeoFqs5xwYtH26fsTSl", "Women's Day": "https://www.facebook.com/20531316728/posts/10154009990506729/" }, role: "Project Lead",
