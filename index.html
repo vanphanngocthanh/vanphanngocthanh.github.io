@@ -218,6 +218,8 @@ a.open:hover{text-decoration:underline}
 /* Skills band */
 #skills{background:var(--hero);position:relative;overflow:hidden}
 #skills h2,#skills .skill h3{color:var(--on-hero)}
+.certs-h{margin:36px 0 0;font-size:1.1rem;color:var(--on-hero)}
+.certs-h + .certs{margin-top:14px}
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px 36px}
 .skill h3{font-size:.95rem;font-weight:700;margin:0 0 6px}
 .skill.wide{grid-column:1/-1}
@@ -561,7 +563,7 @@ document.getElementById("app").innerHTML = `
 
 <section class="block minor" id="skills"><div class="wrap"><div class="sec-head"><h2>Skills &amp; Tools</h2></div>
   <div class="skills">${S.skills.map(g => `<div class="skill${g.wide ? " wide" : ""}"><h3>${e(g.group)}</h3><p>${g.items.map(e).join(" · ")}</p></div>`).join("")}</div>
-  ${S.certs.length ? `<div class="certs">${S.certs.map(c => `<div class="cert-card">
+  ${S.certs.length ? `<h3 class="certs-h">Certification</h3><div class="certs">${S.certs.map(c => `<div class="cert-card">
     <div class="cert-top"><code>${e(c.code)}</code><div class="cert-id"><h3>${e(c.name)}</h3>${c.issued ? `<p class="cert-meta">Issued: ${e(c.issued)}</p>` : ""}</div>${c.url ? `<a class="cert-verify" href="${e(c.url)}" target="_blank" rel="noopener">Verify on Credly ↗</a>` : ""}</div>
     ${c.note ? `<p class="cert-note">${e(c.note)}</p>` : ""}
     ${c.knowledge && c.knowledge.length ? `<p class="label">Key knowledge</p><div class="know">${c.knowledge.map(k => `<div><h4>${e(k.area)}</h4><p>${e(k.items)}</p></div>`).join("")}</div>` : ""}
