@@ -220,7 +220,7 @@ a.open:hover{text-decoration:underline}
 #skills h2,#skills .skill h3{color:var(--on-hero)}
 .certs-h{margin:36px 0 0;font-size:1.1rem;color:var(--on-hero)}
 .certs-h + .certs{margin-top:14px}
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px 36px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px 40px}
 .skill h3{font-size:.95rem;font-weight:700;margin:0 0 6px}
 .skill.wide{grid-column:1/-1}
 .skill p{margin:0;color:var(--on-hero-text);font-size:.95rem}
@@ -440,8 +440,7 @@ const SITE = {
   ],
   skills: [
     { group: "Communications & Branding", items: ["Strategic communications planning", "Employee engagement & internal campaigns", "Content strategy", "Copywriting & editing", "Press release writing & media relations", "Executive presentation design", "Brand governance", "Rebranding & change management", "Employer branding", "CSR & ESG communications"] },
-    { group: "Events", items: ["Large-scale event management", "Corporate & tech events", "Speaker & partner management", "Supplier negotiation"] },
-    { group: "Project Management", items: ["PMP® methodology", "Stakeholder management", "Cross-functional coordination", "Budget & cost control", "Risk mitigation"] },
+    { group: "Event & Project Management", items: ["PMP® methodology", "Large-scale event management", "Corporate & tech events", "Stakeholder management", "Speaker & partner management", "Cross-functional coordination", "Budget & cost control", "Risk mitigation", "Supplier negotiation"] },
     { group: "Data & Reporting", items: ["Power BI", "Data modeling", "DAX", "Dashboard design", "Data storytelling"] },
     { group: "Tools", wide: true, items: ["Jira", "Confluence", "Microsoft 365 (Word, PowerPoint, Excel, Teams, SharePoint)", "Adobe Illustrator", "Canva", "CapCut"] }
   ],
