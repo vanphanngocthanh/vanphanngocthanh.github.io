@@ -359,7 +359,7 @@ const SITE = {
           "Developed corporate & leadership updates, employee stories, event recaps and culture campaigns.",
           "Directed design and video for each post."
         ], image: "" },
-      { tag: "Employer branding", title: "Great Place To Work Certification", org: "CBTW APAC", briefLinks: { "job fairs": "https://lnkd.in/p/gQ_iwNZk" }, titleLink: "https://www.facebook.com/20531316728/posts/10154009990506729/", role: "Project Lead (Year 1) · Partner to People & Culture",
+      { tag: "Employer branding", title: "Great Place To Work Certification", org: "CBTW APAC", ticks: true, briefLinks: { "job fairs": "https://lnkd.in/p/gQ_iwNZk" }, titleLink: "https://www.facebook.com/20531316728/posts/10154009990506729/", role: "Project Lead (Year 1) · Partner to People & Culture",
         stats: [],
         challenge: "Ran the first Great Place To Work cycle end to end, then handed it over to People & Culture.",
         did: [
@@ -520,7 +520,7 @@ function caseCard(c) {
       ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
       ${c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.brief ? (c.tick ? `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${linkify(e(c.brief), c.briefLinks)}</span></p>` : `<p class="case-ch">${linkify(e(c.brief), c.briefLinks)}</p>`)+`${c.did && c.did.length ? `<ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>` : ""}` : `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${e(c.challenge)}</span></p>
-      <ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>`}
+      ${c.ticks ? c.did.map(t => `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${linkify(e(t), c.briefLinks)}</span></p>`).join("") : `<ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>`}`}
       </div>${c.expanded ? "" : "</details>"}
     </div></article>`;
 }
