@@ -507,7 +507,7 @@ const SITE = {
         { area: "Business Environment", items: "Value delivery, Compliance, Organizational change" },
         { area: "Delivery Approaches", items: "Predictive, Agile, Hybrid" }
       ],
-      badges: [{ name: "AI in Agile Delivery", issued: "Oct 30, 2026", img: "img/pmi-ai-1.png" }, { name: "PMI® Essentials: Seven AI Project Patterns", issued: "Oct 28, 2026", img: "img/pmi-ai-2.png" }, { name: "PMI® Foundations: Agentic AI for Project Managers", issued: "Oct 28, 2026", img: "img/pmi-ai-3.png" }, { name: "Generative AI Overview for Project Managers", issued: "Oct 27, 2026", img: "img/pmi-ai-4.png" }] }
+      badges: [{ name: "AI in Agile Delivery", issued: "Oct 2026", img: "img/pmi-ai-1.png" }, { name: "PMI® Essentials: Seven AI Project Patterns", issued: "Oct 2026", img: "img/pmi-ai-2.png" }, { name: "PMI® Foundations: Agentic AI for Project Managers", issued: "Oct 2026", img: "img/pmi-ai-3.png" }, { name: "Generative AI Overview for Project Managers", issued: "Oct 2026", img: "img/pmi-ai-4.png" }] }
   ],
   contact: {
     intro: "Let's connect and explore how strategic communications can move your organization forward.",
@@ -620,7 +620,7 @@ document.getElementById("app").innerHTML = `
     <div class="cert-top">${c.badge ? `<img class="cert-badge" src="${e(c.badge)}" alt="${e(c.code)} badge">` : `<code>${e(c.code)}</code>`}<div class="cert-id"><h3>${e(c.name)}</h3>${c.issued ? `<p class="cert-meta">Issued: ${e(c.issued)}</p>` : ""}</div>${c.url ? `<a class="cert-verify" href="${e(c.url)}" target="_blank" rel="noopener">Verify on Credly ↗</a>` : ""}</div>
     ${c.note ? `<p class="cert-note">${e(c.note)}</p>` : ""}
     ${c.knowledge && c.knowledge.length ? `<p class="label">Key knowledge</p><div class="know">${c.knowledge.map(k => `<div><h4>${e(k.area)}</h4><p>${e(k.items)}</p></div>`).join("")}</div>` : ""}
-    ${c.badges && c.badges.length ? `<p class="label">PMI learning badges</p><div class="badges">${c.badges.map(b => `<div class="badge"><img src="${e(b.img)}" alt="${e(b.name)} badge"><div><h4>${e(b.name)}</h4></div></div>`).join("")}</div>` : ""}
+    ${c.badges && c.badges.length ? `<p class="label">PMI learning badges</p><div class="badges">${c.badges.map(b => `<div class="badge"><img src="${e(b.img)}" alt="${e(b.name)} badge"><div><h4>${e(b.name)}</h4><p>Issued ${e(b.issued)}</p></div></div>`).join("")}</div>` : ""}
   </div>`).join("")}</div>` : ""}
 </div></section>
 
