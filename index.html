@@ -75,6 +75,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance}
 section.block>.wrap{padding-block:64px}
 section.minor>.wrap{padding-block:48px}
 .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.stats-top{margin:14px 0 4px}
 .data-note{margin:-16px 0 24px;font-size:.88rem;font-style:italic;color:var(--muted)}
 h2{font-weight:700;font-size:clamp(1.5rem,3vw,2.05rem);margin:0;color:var(--ink)}
 section.minor h2{font-size:clamp(1.25rem,2.4vw,1.6rem)}
@@ -326,7 +327,7 @@ const SITE = {
   ],
   commsGroups: [
     { title: "Corporate Branding", cases: [
-      { tag: "Rebranding · Change management", title: "Rebranding a group of 10+ subsidiaries", org: "CBTW APAC", briefLinks: { "Hanoi office": "https://www.facebook.com/share/v/1E7YmzofUf/", "opening ceremony": "https://www.facebook.com/share/v/19cD1voLYM/" }, logos: [{ src: "img/bd585f138278.png", name: "PYCOGROUP", wide: true }, { src: "img/8aa036020e99.png", name: "Positive Thinking Company" }, { src: "img/7528a960af12.png", name: "CBTW" }], role: "Project Lead",
+      { tag: "Rebranding · Change management", title: "Rebranding a group of 10+ subsidiaries", statsTop: true, org: "CBTW APAC", briefLinks: { "Hanoi office": "https://www.facebook.com/share/v/1E7YmzofUf/", "opening ceremony": "https://www.facebook.com/share/v/19cD1voLYM/" }, logos: [{ src: "img/bd585f138278.png", name: "PYCOGROUP", wide: true }, { src: "img/8aa036020e99.png", name: "Positive Thinking Company" }, { src: "img/7528a960af12.png", name: "CBTW" }], role: "Project Lead",
         stats: [["10+", "subsidiaries aligned"], ["2", "brand transitions"]],
         challenge: "Move the company and its 10+ subsidiaries from PYCOGROUP to Positive Thinking Company, then to CBTW APAC, under one consistent identity.",
         did: [
@@ -522,8 +523,9 @@ function caseCard(c) {
       <h4>${c.titleLink ? `<a class="title-link" href="${e(c.titleLink)}" target="_blank" rel="noopener">${e(c.title)}</a>` : e(c.title)}</h4>
       <p class="case-role">${e(c.org)} · Role: ${e(c.role)}</p>
       ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
+      ${c.statsTop && c.stats && c.stats.length ? `<div class="stats stats-top">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.expanded ? `<div class="more-body open-body">` : `<details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">`}
-      ${c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
+      ${!c.statsTop && c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.brief ? (c.tick ? `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${linkify(e(c.brief), c.briefLinks)}</span></p>` : `<p class="case-ch">${linkify(e(c.brief), c.briefLinks)}</p>`)+`${c.did && c.did.length ? `<ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>` : ""}` : `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${e(c.challenge)}</span></p>
       ${c.ticks ? c.did.map(t => `<p class="case-ch has-tick"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.4l3 3 6-6.4" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${linkify(e(t), c.briefLinks)}</span></p>`).join("") : `<ul class="built">${c.did.map(t => `<li>${linkify(e(t), c.briefLinks)}</li>`).join("")}</ul>`}`}
       </div>${c.expanded ? "" : "</details>"}
