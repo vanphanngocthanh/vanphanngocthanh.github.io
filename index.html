@@ -76,6 +76,12 @@ section.block>.wrap{padding-block:64px}
 section.minor>.wrap{padding-block:48px}
 .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .stats-top{margin:14px 0 4px}
+.bu-logos{overflow:hidden;margin:14px 0 4px}
+.bu-track{display:flex;gap:8px}
+.bu-track.moving{transition:transform .6s ease}
+.bu-logos span{flex:0 0 calc((100% - 16px)/3);box-sizing:border-box;display:flex;align-items:center;justify-content:center;height:50px;padding:6px 8px;background:#fff;border:1px solid var(--line, #e6e7f2);border-radius:12px}
+.bu-logos img{max-width:100%;max-height:34px;object-fit:contain;filter:grayscale(1);opacity:.9;transition:filter .2s,opacity .2s}
+.bu-logos span:hover img{filter:none;opacity:1}
 .data-note{margin:-16px 0 24px;font-size:.88rem;font-style:italic;color:var(--muted)}
 h2{font-weight:700;font-size:clamp(1.5rem,3vw,2.05rem);margin:0;color:var(--ink)}
 section.minor h2{font-size:clamp(1.25rem,2.4vw,1.6rem)}
@@ -350,7 +356,7 @@ const SITE = {
           "Set guidelines for producing and deploying corporate collateral, POSM, office branding, merchandise, and swag kit.",
           "Advised other departments on branding compliance and corporate communication frameworks."
         ], image: "" },
-      { tag: "In-house agency", title: "Comms services for 10+ business units", org: "CBTW APAC", tick: true, briefLinks: { "CIMB Thai Bank": "https://lnkd.in/p/gMnwBaJh", "CreditorWatch": "https://lnkd.in/p/ggXQnJBa", "hipages": "https://lnkd.in/p/gnaJqU-d", "Next Practice": "https://lnkd.in/p/gHpzAbnq", "Xplore": "https://lnkd.in/p/gEyEDPyF", "JobAdder": "https://lnkd.in/p/gJBd8r59", "Viator": "https://lnkd.in/p/g3dbee5S", "NAB": "https://lnkd.in/p/gFrja2CV", "MessageMedia": "https://lnkd.in/p/grjM8guj", "InfoTrack": "https://lnkd.in/p/gWmUnrrn" }, role: "Comms Partner",
+      { tag: "In-house agency", title: "Comms services for 10+ business units", buLogos: [{ name: "InfoTrack", src: "img/bu-infotrack.png" }, { name: "JobAdder", src: "img/bu-jobadder.png" }, { name: "MessageMedia", src: "img/bu-messagemedia.png" }, { name: "Xplor", src: "img/bu-xplor.png" }], org: "CBTW APAC", tick: true, briefLinks: { "CIMB Thai Bank": "https://lnkd.in/p/gMnwBaJh", "CreditorWatch": "https://lnkd.in/p/ggXQnJBa", "hipages": "https://lnkd.in/p/gnaJqU-d", "Next Practice": "https://lnkd.in/p/gHpzAbnq", "Xplore": "https://lnkd.in/p/gEyEDPyF", "JobAdder": "https://lnkd.in/p/gJBd8r59", "Viator": "https://lnkd.in/p/g3dbee5S", "NAB": "https://lnkd.in/p/gFrja2CV", "MessageMedia": "https://lnkd.in/p/grjM8guj", "InfoTrack": "https://lnkd.in/p/gWmUnrrn" }, role: "Comms Partner",
         stats: [],
         brief: "Delivered team-building events, office branding and merchandise for business units across CBTW, including NAB (National Australia Bank), CIMB Thai Bank, CreditorWatch, Ansarada, MessageMedia, hipages, JobAdder, Next Practice, InfoTrack, Viator (Tripadvisor), Xplore and many more.", image: "" }
     ] },
@@ -530,6 +536,7 @@ function caseCard(c) {
       <h4>${c.titleLink ? `<a class="title-link" href="${e(c.titleLink)}" target="_blank" rel="noopener">${e(c.title)}</a>` : e(c.title)}</h4>
       <p class="case-role">${e(c.org)} · Role: ${e(c.role)}</p>
       ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
+      ${c.buLogos && c.buLogos.length ? `<div class="bu-logos" aria-label="Business units"><div class="bu-track">${c.buLogos.map(l => `<span><img src="${e(l.src)}" alt="${e(l.name)} logo"></span>`).join("")}</div></div>` : ""}
       ${c.statsTop && c.stats && c.stats.length ? `<div class="stats stats-top">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.expanded ? `<div class="more-body open-body">` : `<details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">`}
       ${!c.statsTop && c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
@@ -685,6 +692,15 @@ function initSlider(sl, auto) {
   if (auto) start();
 }
 document.querySelectorAll(".case .slider").forEach(sl => initSlider(sl, true));
+document.querySelectorAll(".bu-track").forEach(tr => {
+  if (tr.children.length <= 3 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  setInterval(() => {
+    if (document.hidden) return;
+    const step = tr.children[0].getBoundingClientRect().width + 8;
+    tr.classList.add("moving"); tr.style.transform = `translateX(-${step}px)`;
+    setTimeout(() => { tr.classList.remove("moving"); tr.appendChild(tr.children[0]); tr.style.transform = ""; }, 650);
+  }, 5000);
+});
 document.querySelectorAll(".case-more").forEach(d => d.addEventListener("toggle", () => { const l = d.querySelector(".more-label"); if (l) l.textContent = d.open ? "Hide details" : "See details"; }));
 const btn = document.getElementById("copy-email");
 if (btn) btn.addEventListener("click", () => {
