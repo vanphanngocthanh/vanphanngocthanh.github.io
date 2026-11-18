@@ -269,6 +269,7 @@ a.open:hover{text-decoration:underline}
 #contact>.wrap{padding-top:16px}
 .cert-card{flex:1 1 100%;background:var(--bg);border-radius:24px;padding:22px 24px;display:grid;gap:14px}
 .cert-top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px}
+.cert-badge{width:84px;height:84px;flex:none}
 .cert-top code{font-family:var(--f-body);font-size:.85rem;font-weight:700;background:var(--cta);color:var(--cta-ink);padding:8px 14px;border-radius:999px}
 .cert-id{flex:1 1 220px;min-width:0}
 .cert-id h3{margin:0;font-size:1.05rem;color:var(--ink)}
@@ -498,7 +499,7 @@ const SITE = {
   ],
   languages: [{ name: "Vietnamese", level: "Native" }, { name: "English", level: "Proficiency" }],
   certs: [
-    { code: "PMP®", name: "Project Management Professional · PMI", issued: "May 2026",
+    { code: "PMP®", name: "Project Management Professional · PMI", issued: "May 2026", badge: "img/pmp-badge.png",
       url: "https://www.credly.com/users/van-phanngocthanh/badges/credly",
       knowledge: [
         { area: "People", items: "Team leadership, Stakeholder engagement, Conflict management, Mentoring" },
@@ -616,7 +617,7 @@ document.getElementById("app").innerHTML = `
 <section class="block minor" id="skills"><div class="wrap"><div class="sec-head"><h2>Skills &amp; Tools</h2></div>
   <ul class="skill-rows">${S.skillRows.map(r => `<li><span class="area">${e(r.area)}</span><span class="tools">${e(r.tools)}</span></li>`).join("")}</ul>
   ${S.certs.length ? `<h3 class="certs-h">Certification</h3><div class="certs">${S.certs.map(c => `<div class="cert-card">
-    <div class="cert-top"><code>${e(c.code)}</code><div class="cert-id"><h3>${e(c.name)}</h3>${c.issued ? `<p class="cert-meta">Issued: ${e(c.issued)}</p>` : ""}</div>${c.url ? `<a class="cert-verify" href="${e(c.url)}" target="_blank" rel="noopener">Verify on Credly ↗</a>` : ""}</div>
+    <div class="cert-top">${c.badge ? `<img class="cert-badge" src="${e(c.badge)}" alt="${e(c.code)} badge">` : `<code>${e(c.code)}</code>`}<div class="cert-id"><h3>${e(c.name)}</h3>${c.issued ? `<p class="cert-meta">Issued: ${e(c.issued)}</p>` : ""}</div>${c.url ? `<a class="cert-verify" href="${e(c.url)}" target="_blank" rel="noopener">Verify on Credly ↗</a>` : ""}</div>
     ${c.note ? `<p class="cert-note">${e(c.note)}</p>` : ""}
     ${c.knowledge && c.knowledge.length ? `<p class="label">Key knowledge</p><div class="know">${c.knowledge.map(k => `<div><h4>${e(k.area)}</h4><p>${e(k.items)}</p></div>`).join("")}</div>` : ""}
     ${c.badges && c.badges.length ? `<p class="label">PMI learning badges</p><div class="badges">${c.badges.map(b => `<div class="badge"><img src="${e(b.img)}" alt="${e(b.name)} badge"><div><h4>${e(b.name)}</h4><p>Issued ${e(b.issued)}</p></div></div>`).join("")}</div>` : ""}
