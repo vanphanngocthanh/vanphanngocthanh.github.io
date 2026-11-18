@@ -76,6 +76,8 @@ section.block>.wrap{padding-block:64px}
 section.minor>.wrap{padding-block:48px}
 .sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
 .stats-top{margin:14px 0 4px}
+.body-img{display:block;position:relative;margin:14px 0 4px;border-radius:14px;overflow:hidden;aspect-ratio:2/1;border:1px solid var(--line, #e6e7f2)}
+.body-img img{width:100%;height:100%;object-fit:cover;display:block}
 .bu-logos{overflow:hidden;margin:14px 0 4px}
 .bu-track{display:flex;gap:8px}
 .bu-track.moving{transition:transform .6s ease}
@@ -357,7 +359,7 @@ const SITE = {
           "Standardized and audited corporate identity assets across online and offline channels.",
           "Set guidelines for producing and deploying corporate collateral, POSM, office branding, merchandise, and swag kit.",
           "Advised other departments on branding compliance and corporate communication frameworks."
-        ], image: "img/swag-kit-2.jpg", imgRatio: "2 / 1", link: "https://lnkd.in/p/gCeAYcXC", linkLabel: "See the swag kit" }
+        ], image: "", bodyImg: { src: "img/swag-kit-2.jpg", alt: "Positive Thinking Company swag kit", link: "https://lnkd.in/p/gCeAYcXC", label: "See the swag kit" } }
     ] },
     { title: "Internal & Employee Comms · Employer Branding", cases: [
       { tag: "Employee engagement", title: "Company-wide events and initiatives", statsTop: true, org: "CBTW APAC", briefLinks: { "company trips": "https://lnkd.in/p/gkCduedQ", "New Year": "https://www.facebook.com/cbtwapac/posts/pfbid0itae1aP5SafaG5193hS6y8T3uznCMucrXjYL7Z3FsnRhh4yZw33zoZwh9c1qZeeAl", "Christmas": "https://www.facebook.com/cbtwapac/posts/pfbid0gzVki3y9obqAFjyGACS6tJYstenr6kt5WPEYcPvdXmRVKDUeoFqs5xwYtH26fsTSl", "Women's Day": "https://lnkd.in/p/gaht-KKf", "Children's Day": "https://lnkd.in/p/gz_dkrHy", "Mid-Autumn Festival": "https://lnkd.in/p/gPnr5Wn5" }, role: "Project Lead",
@@ -536,6 +538,7 @@ function caseCard(c) {
       <p class="case-role">${e(c.org)} · Role: ${e(c.role)}</p>
       ${c.logos && c.logos.length ? `<div class="logo-strip" aria-label="Brand journey">${c.logos.map((l, k) => `${k ? `<span class="logo-arrow" aria-hidden="true">→</span>` : ""}<img src="${e(l.src)}" alt="${e(l.name)} logo" class="${l.wide ? "wide" : ""}">`).join("")}</div>` : ""}
       ${c.buLogos && c.buLogos.length ? `<div class="bu-logos" aria-label="Business units"><div class="bu-track">${c.buLogos.map(l => `<span${l.bg ? ` style="background:${e(l.bg)};border-color:${e(l.bg)}"` : ""}><img src="${e(l.src)}" alt="${e(l.name)} logo"></span>`).join("")}</div></div>` : ""}
+      ${c.bodyImg ? `<a class="body-img" href="${e(c.bodyImg.link)}" target="_blank" rel="noopener"><img src="${e(c.bodyImg.src)}" alt="${e(c.bodyImg.alt)}"><span class="img-link">${e(c.bodyImg.label)} ↗</span></a>` : ""}
       ${c.statsTop && c.stats && c.stats.length ? `<div class="stats stats-top">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
       ${c.expanded ? `<div class="more-body open-body">` : `<details class="case-more"><summary><span class="more-label">See details</span><span class="plus" aria-hidden="true"></span></summary><div class="more-body">`}
       ${!c.statsTop && c.stats && c.stats.length ? `<div class="stats">${c.stats.map(s => `<div><b>${e(s[0])}</b><span>${e(s[1])}</span></div>`).join("")}</div>` : ""}
